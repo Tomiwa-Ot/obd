@@ -207,6 +207,36 @@ public class Mode01 {
     public static final String FUEL_RAIL_GAUGE_PRESSURE = MODE + " 23";
 
     /**
+     * Fuel type
+     */
+    public static final String FUEL_TYPE = MODE + " 51";
+
+    /**
+     * Relative accelerator pedal position
+     */
+    public static final String RELATIVE_ACCELERATOR_PEDAL_POSITION = MODE + " 5A";
+
+    /**
+     * Hybrid battery pack remaining life
+     */
+    public static final String HYBRID_BATTERY_PACK_REMAINING_LIFE = MODE + " 5B";
+
+    /**
+     * Engine oil temperature
+     */
+    public static final String ENGINE_OIL_TEMPERATURE = MODE + " 5C";
+
+    /**
+     * Fuel injection timing
+     */
+    public static final String FUEL_INJECTION_TIMING = MODE + " 5D";
+
+    /**
+     * Engine fuel rate
+     */
+    public static final String ENGINE_FUEL_RATE = MODE + " 5E";
+
+    /**
      * Actual EGR, Commanded EGR, and EGR Error
      */
     public static final String EGR = MODE + " 69";
