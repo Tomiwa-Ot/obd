@@ -3,7 +3,7 @@ package com.grephq.ot.obd;
 /**
  * OBD Commands
  */
-public class OBDCommand {
+public class ATCommand {
 
     // -------------------------
     // Identification Commands |
@@ -21,13 +21,13 @@ public class OBDCommand {
     // --------------------------
 
     // Performs device reset and returns ELM-USB identification
-    public static final String RESET = "ATZ";
+    public static final String RESET = "AT Z";
 
     // Perform soft reset and returns ELM-USB identification
-    public static final String WARM_START = "ATWS";
+    public static final String WARM_START = "AT WS";
 
     // Terminates current diagnostic session
-    public static final String PROTOCOL_CLOSE = "ATPC";
+    public static final String PROTOCOL_CLOSE = "AT PC";
 
     // ------------------------------
     // Communication Setup Commands |
@@ -42,17 +42,17 @@ public class OBDCommand {
     // Disable line feed
     public static final String DISABLE_LINE_FEED = "ATL1";
 
-    // Echo on
-    public static final String ECHO_ON = "ATE0";
-
     // Echo off
-    public static final String ECHO_OFF = "ATE1";
+    public static final String ECHO_OFF = "AT E0";
 
-    // Enable display headers parameter
-    public static final String ENABLE_DISPLAY_HEADERS = "ATH0";
+    // Echo on
+    public static final String ECHO_ON = "AT E1";
 
     // Disable display headers parameter
-    public static final String DISABLE_DISPLAY_HEADERS = "ATH1";
+    public static final String DISABLE_DISPLAY_HEADERS = "ATH0";
+
+    // Enable display headers parameter
+    public static final String ENABLE_DISPLAY_HEADERS = "ATH1";
 
     // -------------------
     // Protocol Commands |
