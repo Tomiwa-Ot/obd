@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
+import android.hardware.usb.UsbEndpoint;
+import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 
 import androidx.core.app.ActivityCompat;
@@ -19,24 +21,43 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.util.Arrays;
 
 /**
  * OBD module for reading vehicle diagnostics from ELM327 adapter
  */
 public class Obd {
 
-    // Headers status
+    /**
+     * Headers status
+     */
     private boolean displayHeaders;
 
-    // The mode of connection
+    /**
+     * The mode of connection
+     */
     private ConnectionType connectionType;
-    private BluetoothAdapter adapter;
+
+    /**
+     * Connection timeout
+     */
+    private final int TIMEOUT_MS = 30000;
+
+    /**
+     * Objects required for connection via bluetooth
+     */
+    private BluetoothSocket socket;
     private OutputStream outputStream;
     private InputStream inputStream;
-    private BluetoothSocket socket;
-    private UsbDeviceConnection connection;
     private DataOutputStream dataOutputStream;
     private BufferedReader bufferedReader;
+
+    /**
+     * Objects required for connection via USB
+     */
+    private UsbDevice device;
+    private UsbDeviceConnection connection;
 
     /**
      * Class constructor for bluetooth connections
@@ -80,7 +101,7 @@ public class Obd {
             throw new Exception("ELM327 USB adapter is not connected");
 
         // Get connected USB device
-        UsbDevice device = usbManager.getDeviceList().values().iterator().next();
+        device = usbManager.getDeviceList().values().iterator().next();
         connection = usbManager.openDevice(device);
 
         if (connection == null)
@@ -133,7 +154,7 @@ public class Obd {
      *
      * @param command The command to send to the ELM327 adapter
      * @return Response gotten from the adapter
-     * @throws IOException
+     * @throws IOException If something goes wrong when sending data over bluetooth
      */
     public String sendCommand(String command) throws IOException {
         if (connectionType == ConnectionType.BLUETOOTH) {
@@ -149,7 +170,27 @@ public class Obd {
 
             return builder.toString();
         } else if (connectionType == ConnectionType.USB) {
-            return "";
+            byte[] commandInBytes = command.getBytes();
+
+            UsbInterface usbInterface = device.getInterface(0);
+            UsbEndpoint endpoint = usbInterface.getEndpoint(0);
+
+            connection.claimInterface(usbInterface, true);
+
+            // Send command to USB
+            connection.bulkTransfer(endpoint, commandInBytes, commandInBytes.length, TIMEOUT_MS);
+
+            // Receive response
+            byte[] buffer = new byte[1024]; // Buffer to store the received data
+            int bytesRead = connection.bulkTransfer(endpoint, buffer, buffer.length, TIMEOUT_MS);
+
+            if (bytesRead > 0) {
+                // Data received successfully
+                byte[] responseData = Arrays.copyOf(buffer, bytesRead);
+                return new String(responseData, Charset.defaultCharset());
+            }
+
+            return null;
         } else {
             throw new IllegalArgumentException("Unknown mode of connection");
         }
