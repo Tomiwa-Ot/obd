@@ -20,4 +20,4 @@ String engineCoolantTemperature = obd.sendCommand(Mode01.ENGINE_COOLANT_TEMPERAT
 ```
 
 ### Documentation
-https://github.com/Tomiwa-Ot/obd/wiki
+For a list of all available commands, https://github.com/Tomiwa-Ot/obd/wiki
