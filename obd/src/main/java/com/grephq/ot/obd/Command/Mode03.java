@@ -1,10 +1,9 @@
-package com.grephq.ot.obd.modes;
+package com.grephq.ot.obd.Command;
 
 /**
  * Show stored Diagnostic Trouble Codes
  */
 public class Mode03 {
 
-    // OBD Mode
-    private final String MODE = "03";
+    public static final String GET_DIAGNOSTIC_TROUBLE_CODES = "03";
 }

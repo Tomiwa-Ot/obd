@@ -1,4 +1,4 @@
-package com.grephq.ot.obd.modes;
+package com.grephq.ot.obd.Command;
 
 /**
  * Show pending Diagnostic Trouble Codes (detected during current or last driving cycle)

@@ -1,4 +1,4 @@
-package com.grephq.ot.obd.modes;
+package com.grephq.ot.obd.Command;
 
 /**
  * Control operation of on-board component/system

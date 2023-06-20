@@ -1,4 +1,4 @@
-package com.grephq.ot.obd.modes;
+package com.grephq.ot.obd.Command;
 
 /**
  * Test results, oxygen sensor monitoring (non CAN only)

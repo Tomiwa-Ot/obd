@@ -1,4 +1,4 @@
-package com.grephq.ot.obd.modes;
+package com.grephq.ot.obd.Command;
 
 /**
  * Permanent Diagnostic Trouble Codes (DTCs) (Cleared DTCs)
