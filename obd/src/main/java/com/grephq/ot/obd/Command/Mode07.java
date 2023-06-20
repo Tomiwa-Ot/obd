@@ -5,6 +5,8 @@ package com.grephq.ot.obd.Command;
  */
 public class Mode07 {
 
-    // OBD Mode
-    private final String MODE = "07";
+    /**
+     * Get DTCs from the current/last driving cycle
+     */
+    public static final String GET_CURRENT_DTC = "07";
 }

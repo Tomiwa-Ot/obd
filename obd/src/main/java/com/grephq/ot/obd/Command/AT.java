@@ -9,18 +9,24 @@ public class AT {
     // Identification Commands |
     // -------------------------
 
-    // Returns fixed device identification
+    /**
+     * Returns fixed device identification
+     */
     public static final String DEVICE_IDENTIFICATION = "AT I";
 
-    // Retrieve ELM-USB unique interface serial number (ELM-USB
-    // specific, not part of ELM32x command set)
+    /**
+     * Retrieve ELM-USB unique interface serial number (ELM-USB
+     * specific, not part of ELM32x command set)
+     */
     public static final String INTERFACE_SERIAL_NUMBER = "AT/N";
 
     // --------------------------
     // ELM-USB Control Commands |
     // --------------------------
 
-    // Performs device reset and returns ELM-USB identification
+    /**
+     * Performs device reset and returns ELM-USB identification
+     */
     public static final String RESET = "AT Z";
 
     // Perform soft reset and returns ELM-USB identification
@@ -94,6 +100,8 @@ public class AT {
     // Returns currently used diagnostic protocol ("AUTO, protocol", if auto-detection is set)
     public static final String DISPLAY_PROTOCOL = "AT DP";
 
-    // Performs an OBD-II protocol buffer dump. Not to be used by applications
+    /**
+     * Performs an OBD-II protocol buffer dump. Not to be used by applications
+     */
     public static final String PROTOCOL_BUFFER_DUMP = "ARBD";
 }

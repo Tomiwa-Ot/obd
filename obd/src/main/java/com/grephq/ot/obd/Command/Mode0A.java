@@ -5,6 +5,4 @@ package com.grephq.ot.obd.Command;
  */
 public class Mode0A {
 
-    // OBD Mode
-    private final String MODE = "0A";
 }
