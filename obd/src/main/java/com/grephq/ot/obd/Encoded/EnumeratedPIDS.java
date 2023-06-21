@@ -79,4 +79,34 @@ public class EnumeratedPIDS {
         put(32, "India OBD II (IOBD II)");
         put(33, "Heavy Duty Euro OBD Stage VI (HD EOBD-IV)");
     }};
+
+    /**
+     * Fuel type
+     */
+    public Map<Integer, String> FuelType = new HashMap<Integer, String>() {{
+        put(0, "Not available");
+        put(1, "Gasoline");
+        put(2, "Methanol");
+        put(3, "Ethanol");
+        put(4, "Diesel");
+        put(5, "LPG");
+        put(6, "CNG");
+        put(7, "Propane");
+        put(8, "Electric");
+        put(9, "Bifuel running gasoline");
+        put(10, "Bifuel running methanol");
+        put(11, "Bifuel running ethanol");
+        put(12, "Bifuel running LPG");
+        put(13, "Bifuel running CNG");
+        put(14, "Bifuel running propane");
+        put(15, "Bifuel running electricity");
+        put(16, "Bifuel running electric and combustion engine");
+        put(17, "Hybrid gasoline");
+        put(18, "Hybrid ethanol");
+        put(19, "Hybrid diesel");
+        put(20, "Hybrid electric");
+        put(21, "Hybrid running electric and combustion engine");
+        put(22, "Hybrid regenerative");
+        put(23, "Bifuel running diesel");
+    }};
 }
