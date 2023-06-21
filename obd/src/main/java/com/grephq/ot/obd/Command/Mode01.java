@@ -207,6 +207,111 @@ public class Mode01 {
     public static final String FUEL_RAIL_GAUGE_PRESSURE = MODE + " 23";
 
     /**
+     * Commanded EGR
+     */
+    public static final String COMMANDED_EGR = MODE + " 2C";
+
+    /**
+     * EGR Error
+     */
+    public static final String EGR_ERROR = MODE + " 2D";
+
+    /**
+     * Commanded evaporative purge
+     */
+    public static final String COMMANDED_EVAPORATIVE_PURGE = MODE + " 2E";
+
+    /**
+     * Fuel Tank Level Input
+     */
+    public static final String FUEL_TANK_LEVEL_INPUT = MODE + " 2F";
+
+    /**
+     * Warm-ups since codes cleared
+     */
+    public static final String WARM_UPS_SINCE_CODES_CLEARED = MODE + " 30";
+
+    /**
+     * Distance traveled since codes cleared
+     */
+    public static final String DISTANCE_TRAVELED_SINCE_CODES_CLEARED = MODE + " 31";
+
+    /**
+     * Evap. System Vapor Pressure
+     */
+    public static final String EVAP_SYSTEM_VAPOR_PRESSURE = MODE + " 32";
+
+    /**
+     * Absolute Barometric Pressure
+     */
+    public static final String ABSOLUTE_BAROMETRIC_PRESSURE = MODE + " 33";
+
+    /**
+     * Control module voltage
+     */
+    public static final String CONTROL_MODULE_VOLTAGE = MODE + " 42";
+
+    /**
+     * Absolute load value
+     */
+    public static final String ABSOLUTE_LOAD_VALUE = MODE + " 43";
+
+    /**
+     * Commanded Air-Fuel Equivalence Ratio
+     */
+    public static final String COMMANDED_AIR_FUEL_EQUIVALENCE_RATIO = MODE + " 44";
+
+    /**
+     * Relative throttle position
+     */
+    public static final String RELATIVE_THROTTLE_POSITION = MODE + " 45";
+
+    /**
+     * Ambient air temperature
+     */
+    public static final String AMBIENT_AIR_TEMPERATURE = MODE + " 46";
+
+    /**
+     * Absolute throttle position B
+     */
+    public static final String ABSOLUTE_THROTTLE_POSITION_B = MODE + " 47";
+
+    /**
+     * Absolute throttle position C
+     */
+    public static final String ABSOLUTE_THROTTLE_POSITION_C = MODE +  " 48";
+
+    /**
+     * Accelerator pedal position D
+     */
+    public static final String ACCELERATOR_PEDAL_POSITION_D = MODE + " 49";
+
+    /**
+     * Accelerator pedal position E
+     */
+    public static final String ACCELERATOR_PEDAL_POSITION_E = MODE + " 4A";
+
+    /**
+     * Accelerator pedal position F
+     */
+    public static final String ACCELERATOR_PEDAL_POSITION_F = MODE + " 4B";
+
+    /**
+     * Commanded throttle actuator
+     */
+    public static final String COMMANDED_THROTTLE_ACTUATOR = MODE + " 4C";
+
+    /**
+     * Time run with MIL on
+     */
+    public static final String TIME_RUN_WITH_MIL_ON = MODE + " 4D";
+
+    /**
+     * Time since trouble codes cleared
+     */
+    public static final String TIME_SINCE_TROUBLE_CODES_CLEARED = MODE + " 4E";
+
+    /**
      * Fuel type
      */
     public static final String FUEL_TYPE = MODE + " 51";
@@ -254,7 +359,7 @@ public class Mode01 {
     /**
      * Commanded throttle actuator control and relative throttle position
      */
-    public static final String RELATIVE_THROTTLE_POSITION = MODE + " 6C";
+    public static final String COMMANDED_THROTTLE_ACTUATOR_CONTROL_AND_RELATIVE_THROTTLE_POSITION = MODE + " 6C";
 
     /**
      * Fuel pressure control system
