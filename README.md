@@ -19,10 +19,35 @@ String deviceId = obd.sendCommand(AT.DEVICE_IDENTIFICATION);
 
 // Get engine coolant temperature
 String engineCoolantTemperature = obd.sendCommand(Mode01.ENGINE_COOLANT_TEMPERATURE);
+
+// Get vehicle speed (km/h)
+double speed = obd.getVehicleSpeed();
+
+// Get engine oil temperature (°C)
+double oilTemperature = obd.getEngineOilTemperature();
 ```
 
+### Installation
+- Add it in your root build.gradle at the end of repositories
+  
+  ```
+  allprojects {
+  		repositories {
+  			...
+  			maven { url 'https://jitpack.io' }
+  		}
+   }
+   ```
+- Add dependency
+
+  ```
+  dependencies {
+	        implementation 'com.github.Tomiwa-Ot:obd:Tag'
+	}
+  ```
+  
 ### Documentation
-For a list of all available commands, https://github.com/Tomiwa-Ot/obd/wiki
+https://github.com/Tomiwa-Ot/obd/wiki
 
 ## TODO
 - Add more AT commands
