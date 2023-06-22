@@ -19,10 +19,18 @@ String deviceId = obd.sendCommand(AT.DEVICE_IDENTIFICATION);
 
 // Get engine coolant temperature
 String engineCoolantTemperature = obd.sendCommand(Mode01.ENGINE_COOLANT_TEMPERATURE);
+
+// Get vehicle speed (km/h)
+double speed = obd.getVehicleSpeed();
+
+// Get engine oil temperature (°C)
+double oilTemperature = obd.getEngineOilTemperature();
 ```
 
+### Installation
+
 ### Documentation
-For a list of all available commands, https://github.com/Tomiwa-Ot/obd/wiki
+https://github.com/Tomiwa-Ot/obd/wiki
 
 ## TODO
 - Add more AT commands
