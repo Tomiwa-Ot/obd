@@ -208,6 +208,7 @@ public class Obd {
      * Get engine coolant temperature
      *
      * @return engine coolant temperature °C
+     * @throws IOException if something goes wrong when sending request
      */
     public double getEngineCoolantTemperature() throws IOException {
         // Disable headers from being in response
@@ -240,6 +241,7 @@ public class Obd {
      * Get calculated engine load
      *
      * @return calculated engine load (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getEngineLoad() throws IOException {
         // Disable headers from being in response
@@ -272,6 +274,7 @@ public class Obd {
      * Get engine oil temperature
      *
      * @return engine oil temperature in °C
+     * @throws IOException if something goes wrong when sending request
      */
     public double getEngineOilTemperature() throws IOException {
         // Disable headers from being in response
@@ -304,6 +307,7 @@ public class Obd {
      * Get relative accelerator pedal position
      *
      * @return relative accelerator pedal position (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getRelativeAcceleratorPedalPosition() throws IOException {
         // Disable headers from being in response
@@ -336,6 +340,7 @@ public class Obd {
      * Get hybrid battery pack remaining life
      *
      * @return hybrid battery pack remaining life (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getHybridBatteryPackRemainingLife() throws IOException {
         // Disable headers from being in response
@@ -368,6 +373,7 @@ public class Obd {
      * Get EGR error
      *
      * @return EGR error (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getEGRError() throws IOException {
         // Disable headers from being in response
@@ -382,6 +388,7 @@ public class Obd {
      * Get minimum EGR error (%)
      *
      * @return minimum EGR error (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getMinimumEGRError() {
         return -100;
@@ -400,6 +407,7 @@ public class Obd {
      * Get fuel Tank Level Input
      *
      * @return Fuel Tank Level Input (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getFuelTankInputLevel() throws IOException {
         // Disable headers from being in response
@@ -432,6 +440,7 @@ public class Obd {
      * Get fuel rail pressure
      *
      * @return fuel rail pressure (kPa)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getFuelRailPressure() throws IOException {
         // Disable headers from being in response
@@ -464,6 +473,7 @@ public class Obd {
      * Get fuel rail gauge pressure
      *
      * @return fuel rail gauge pressure (kPa)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getFuelRailGaugePressure() throws IOException {
         // Disable headers from being in response
@@ -496,6 +506,7 @@ public class Obd {
      * Get fuel injection timing
      *
      * @return fuel injection timing (°)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getFuelInjectionTiming() throws IOException {
         // Disable headers from being in response
@@ -528,6 +539,7 @@ public class Obd {
      * Get timing advance
      *
      * @return timing advance
+     * @throws IOException if something goes wrong when sending request
      */
     public double getTimingAdvance() throws IOException {
         // Disable headers from being in response
@@ -560,6 +572,7 @@ public class Obd {
      * Get fuel type
      *
      * @return fuel type
+     * @throws IOException if something goes wrong when sending request
      */
     public AbstractMap.SimpleEntry<Integer, String> getFuelType() throws IOException {
         // Disable headers from being in response
@@ -574,6 +587,7 @@ public class Obd {
      * Get engine fuel rate
      *
      * @return engine fuel rate (L/h)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getEngineFuelRate() throws IOException {
         // Disable headers from being in response
@@ -606,6 +620,7 @@ public class Obd {
      * Get fuel pressure
      *
      * @return fuel pressure in kPa
+     * @throws IOException if something goes wrong when sending request
      */
     public double getFuelPressure() throws IOException {
         // Disable headers from being in response
@@ -638,6 +653,7 @@ public class Obd {
      * Get vehicle intake air temperature
      *
      * @return vehicle intake air temperature (°C)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getVehicleIntakeAirTemperature() throws IOException {
         // Disable headers from being in response
@@ -670,6 +686,7 @@ public class Obd {
      * Get throttle position
      *
      * @return throttle position (%)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getThrottlePosition() throws IOException {
         // Disable headers from being in response
@@ -702,6 +719,7 @@ public class Obd {
      * Get vehicle speed
      *
      * @return vehicle speed in km/h
+     * @throws IOException if something goes wrong when sending request
      */
     public double getVehicleSpeed() throws IOException {
         // Disable headers from being in response
@@ -734,6 +752,7 @@ public class Obd {
      * Get engine speed
      *
      * @return engine speed (rpm)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getEngineSpeed() throws IOException {
         // Disable headers from being in response
@@ -748,6 +767,7 @@ public class Obd {
      * Get exhaust pressure
      *
      * @return exhaust pressure
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] getExhaustPressure() throws IOException {
         // Disable headers from being in response
@@ -763,6 +783,7 @@ public class Obd {
      * Get turbocharger rpm
      *
       * @return turbocharger rpm
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] getTurbochargerRPM() throws IOException {
         // Disable headers from being in response
@@ -796,6 +817,7 @@ public class Obd {
      * Get odometer
      *
      * @return odometer (km)
+     * @throws IOException if something goes wrong when sending request
      */
     public double getOdometer() throws IOException {
         // Disable headers from being in response
@@ -826,7 +848,9 @@ public class Obd {
 
     /**
      * Show stored Diagnostic Trouble Codes (DTCs)
+     *
      * @return Diagnostic Trouble Codes
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] requestTroubleCodes() throws IOException {
         // Disable headers from being in response
@@ -840,6 +864,8 @@ public class Obd {
 
     /**
      * Clear trouble codes / Malfunction indicator lamp (MIL) / Check engine light
+     *
+     * @throws IOException if something goes wrong when sending request
      */
     public void clearDiagnosticTroubleCodes() throws IOException {
         sendCommand(Mode04.CLEAR_DIAGNOSTIC_TROUBLE_CODES);
@@ -849,6 +875,7 @@ public class Obd {
      * Get pending trouble codes
      *
      * @return pending trouble codes
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] getPendingTroubleCodes() throws IOException {
         // Disable headers from being in response
@@ -864,6 +891,7 @@ public class Obd {
      * Get calibration ID
      *
      * @return Get calibration ID
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] getCalibrationID() throws IOException {
         // Disable headers from being in response
@@ -879,6 +907,7 @@ public class Obd {
      * Get vehicle identification number
      *
      * @return vehicle identification number
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] getVehicleIdentificationNumber() throws IOException {
         // Disable headers from being in response
@@ -894,6 +923,7 @@ public class Obd {
      * Get ECU name
      *
      * @return ECU name
+     * @throws IOException if something goes wrong when sending request
      */
     public String[] getECUName() throws IOException {
         // Disable headers from being in response
