@@ -21,3 +21,7 @@ String engineCoolantTemperature = obd.sendCommand(Mode01.ENGINE_COOLANT_TEMPERAT
 
 ### Documentation
 For a list of all available commands, https://github.com/Tomiwa-Ot/obd/wiki
+
+## TODO
+- Add more AT commands
+- Add Obd and Decoder methods to fetch Mode01 data and decode it
