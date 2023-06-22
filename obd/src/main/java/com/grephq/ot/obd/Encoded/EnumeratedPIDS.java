@@ -16,7 +16,7 @@ public class EnumeratedPIDS {
      * and is encoded identically to the first byte. The meaning assigned
      * to the value of each byte is as follows:
      */
-    public Map<Integer, String> FuelSystemStatus = new HashMap<Integer, String>() {{
+    public static Map<Integer, String> FuelSystemStatus = new HashMap<Integer, String>() {{
         put(0, "The motor is off");
         put(1, "Open loop due to insufficient engine temperature");
         put(2, "Closed loop, using oxygen sensor feedback to determine fuel mix");
@@ -30,7 +30,7 @@ public class EnumeratedPIDS {
      * A request for this PID returns a single byte of data
      * which describes the secondary air status.
      */
-    public Map<Integer, String> CommandedSecondaryAirStatus = new HashMap<Integer, String>() {{
+    public static Map<Integer, String> CommandedSecondaryAirStatus = new HashMap<Integer, String>() {{
         put(1, "Upstream");
         put(2, "Downstream of catalytic converter");
         put(4, "From the outside atmosphere or off");
@@ -44,7 +44,7 @@ public class EnumeratedPIDS {
      * with. The different values the data byte can hold are shown below,
      * next to what they mean:
      */
-    public Map<Integer, String> VehicleStandards = new HashMap<Integer, String>() {{
+    public static Map<Integer, String> VehicleStandards = new HashMap<Integer, String>() {{
         put(1, "OBD-II as defined by the CARB");
         put(2, "OBD as defined by the EPA");
         put(3, "OBD and OBD-II");
@@ -83,7 +83,7 @@ public class EnumeratedPIDS {
     /**
      * Fuel type
      */
-    public Map<Integer, String> FuelType = new HashMap<Integer, String>() {{
+    public static Map<Integer, String> FuelType = new HashMap<Integer, String>() {{
         put(0, "Not available");
         put(1, "Gasoline");
         put(2, "Methanol");
