@@ -28,7 +28,24 @@ double oilTemperature = obd.getEngineOilTemperature();
 ```
 
 ### Installation
+- Add it in your root build.gradle at the end of repositories
+  
+  ```
+  allprojects {
+  		repositories {
+  			...
+  			maven { url 'https://jitpack.io' }
+  		}
+   }
+   ```
+- Add dependency
 
+  ```
+  dependencies {
+	        implementation 'com.github.Tomiwa-Ot:obd:Tag'
+	}
+  ```
+  
 ### Documentation
 https://github.com/Tomiwa-Ot/obd/wiki
 
