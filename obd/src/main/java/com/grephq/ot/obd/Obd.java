@@ -19,6 +19,7 @@ import com.grephq.ot.obd.Command.Mode03;
 import com.grephq.ot.obd.Command.Mode04;
 import com.grephq.ot.obd.Command.Mode07;
 import com.grephq.ot.obd.Command.Mode09;
+import com.grephq.ot.obd.Encoded.Decoder;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -27,6 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.util.AbstractMap;
 import java.util.Arrays;
 
 /**
@@ -208,8 +210,12 @@ public class Obd {
      * @return engine coolant temperature °C
      */
     public double getEngineCoolantTemperature() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.ENGINE_COOLANT_TEMPERATURE);
-        return 0;
+        return Decoder.decodeCoolantTemperature(response);
     }
 
     /**
@@ -236,8 +242,12 @@ public class Obd {
      * @return calculated engine load (%)
      */
     public double getEngineLoad() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.ENGINE_LOAD);
-        return 0;
+        return Decoder.decodeEngineLoad(response);
     }
 
     /**
@@ -264,8 +274,12 @@ public class Obd {
      * @return engine oil temperature in °C
      */
     public double getEngineOilTemperature() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.ENGINE_OIL_TEMPERATURE);
-        return 0;
+        return Decoder.decodeEngineOilTemperature(response);
     }
 
     /**
@@ -292,8 +306,12 @@ public class Obd {
      * @return relative accelerator pedal position (%)
      */
     public double getRelativeAcceleratorPedalPosition() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.RELATIVE_ACCELERATOR_PEDAL_POSITION);
-        return 0;
+        return Decoder.decodeRelativeAcceleratorPedalPosition(response);
     }
 
     /**
@@ -320,8 +338,12 @@ public class Obd {
      * @return hybrid battery pack remaining life (%)
      */
     public double getHybridBatteryPackRemainingLife() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.HYBRID_BATTERY_PACK_REMAINING_LIFE);
-        return 0;
+        return Decoder.decodeHybridBatteryPackRemainingLife(response);
     }
 
     /**
@@ -343,13 +365,145 @@ public class Obd {
     }
 
     /**
+     * Get EGR error
+     *
+     * @return EGR error (%)
+     */
+    public double getEGRError() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.EGR_ERROR);
+        return Decoder.decodeEGRError(response);
+    }
+
+    /**
+     * Get minimum EGR error (%)
+     *
+     * @return minimum EGR error (%)
+     */
+    public double getMinimumEGRError() {
+        return -100;
+    }
+
+    /**
+     * Get maximum EGR error(%)
+     *
+     * @return maximum EGR error (%)
+     */
+    public double getMaximumEGRError() {
+        return 99.2;
+    }
+
+    /**
+     * Get fuel Tank Level Input
+     *
+     * @return Fuel Tank Level Input (%)
+     */
+    public double getFuelTankInputLevel() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.FUEL_TANK_LEVEL_INPUT);
+        return Decoder.decodeFuelTankInputLevel(response);
+    }
+
+    /**
+     * Get minimum fuel Tank Level Input
+     *
+     * @return Fuel Tank Level Input (%)
+     */
+    public double getMinimumFuelTankInputLevel() {
+        return 0;
+    }
+
+    /**
+     * Get maximum fuel Tank Level Input
+     *
+     * @return Fuel Tank Level Input (%)
+     */
+    public double getMaximumFuelTankInputLevel() {
+        return 100;
+    }
+
+    /**
+     * Get fuel rail pressure
+     *
+     * @return fuel rail pressure (kPa)
+     */
+    public double getFuelRailPressure() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.FUEL_RAIL_PRESSURE);
+        return Decoder.decodeFuelRailPressure(response);
+    }
+
+    /**
+     * Get minimum fuel rail pressure
+     *
+     * @return minimum fuel rail pressure (kPa)
+     */
+    public double getMinimumFuelRailPressure() {
+        return 0;
+    }
+
+    /**
+     * Get maximum fuel rail pressure
+     *
+     * @return maximum fuel rail pressure (kPa)
+     */
+    public double getMaximumFuelRailPressure() {
+        return 5177.265;
+    }
+
+    /**
+     * Get fuel rail gauge pressure
+     *
+     * @return fuel rail gauge pressure (kPa)
+     */
+    public double getFuelRailGaugePressure() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.FUEL_INJECTION_TIMING);
+        return Decoder.decodeFuelGaugeRailPressure(response);
+    }
+
+    /**
+     * Get minimum fuel rail gauge pressure
+     *
+     * @return minimum fuel rail gauge pressure (kPa)
+     */
+    public double getMinimumFuelRailGaugePressure() {
+        return 0;
+    }
+
+    /**
+     * Get maximum fuel rail gauge pressure
+     *
+     * @return maximum fuel rail gauge pressure (kPa)
+     */
+    public double getMaximumFuelRailGaugePressure() {
+        return 655350;
+    }
+
+    /**
      * Get fuel injection timing
      *
      * @return fuel injection timing (°)
      */
     public double getFuelInjectionTiming() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.FUEL_INJECTION_TIMING);
-        return 0;
+        return Decoder.decodeFuelInjectionTiming(response);
     }
 
     /**
@@ -371,13 +525,63 @@ public class Obd {
     }
 
     /**
+     * Get timing advance
+     *
+     * @return timing advance
+     */
+    public double getTimingAdvance() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.TIMING_ADVANCE);
+        return Decoder.decodeTimingAdvance(response);
+    }
+
+    /**
+     * Get minimum timing advance
+     *
+     * @return minimum timing advance
+     */
+    public double getMinimumTimingAdvance() {
+        return -64;
+    }
+
+    /**
+     * Get maximum timing advance
+     *
+     * @return maximum timing advance
+     */
+    public double getMaximumTimingAdvance() {
+        return 63.5;
+    }
+
+    /**
+     * Get fuel type
+     *
+     * @return fuel type
+     */
+    public AbstractMap.SimpleEntry<Integer, String> getFuelType() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.FUEL_TYPE);
+        return Decoder.decodeFuelType(response);
+    }
+
+    /**
      * Get engine fuel rate
      *
      * @return engine fuel rate (L/h)
      */
     public double getEngineFuelRate() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.ENGINE_FUEL_RATE);
-        return 0;
+        return Decoder.decodeEngineFuelRate(response);
     }
 
     /**
@@ -404,8 +608,12 @@ public class Obd {
      * @return fuel pressure in kPa
      */
     public double getFuelPressure() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.FUEL_PRESSURE);
-        return 0;
+        return Decoder.decodeFuelPressure(response);
     }
 
     /**
@@ -432,8 +640,12 @@ public class Obd {
      * @return vehicle intake air temperature (°C)
      */
     public double getVehicleIntakeAirTemperature() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.INTAKE_AIR_TEMPERATURE);
-        return 0;
+        return Decoder.decodeIntakeAirTemperature(response);
     }
 
     /**
@@ -460,8 +672,12 @@ public class Obd {
      * @return throttle position (%)
      */
     public double getThrottlePosition() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.THROTTLE_POSITION);
-        return 0;
+        return Decoder.decodeThrottlePosition(response);
     }
 
     /**
@@ -488,8 +704,12 @@ public class Obd {
      * @return vehicle speed in km/h
      */
     public double getVehicleSpeed() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.VEHICLE_SPEED);
-        return 0;
+        return Decoder.decodeVehicleSpeed(response);
     }
 
     /**
@@ -516,8 +736,12 @@ public class Obd {
      * @return engine speed (rpm)
      */
     public double getEngineSpeed() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.ENGINE_SPEED);
-        return 0;
+        return Decoder.decodeEngineSpeed(response);
     }
 
     /**
@@ -525,9 +749,14 @@ public class Obd {
      *
      * @return exhaust pressure
      */
-    public double getExhaustPressure() throws IOException {
+    public String[] getExhaustPressure() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand( Mode01.EXHAUST_PRESSURE);
-        return 0;
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 
     /**
@@ -535,9 +764,14 @@ public class Obd {
      *
       * @return turbocharger rpm
      */
-    public double getTurbochargerRPM() throws IOException {
+    public String[] getTurbochargerRPM() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode01.TURBOCHARGER_RPM);
-        return 0;
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 
     /**
@@ -559,12 +793,49 @@ public class Obd {
     }
 
     /**
+     * Get odometer
+     *
+     * @return odometer (km)
+     */
+    public double getOdometer() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
+        String response = sendCommand(Mode01.ODOMETER);
+        return Decoder.decodeOdometer(response);
+    }
+
+    /**
+     * Get minimum odometer
+     *
+     * @return minimum odometer (km)
+     */
+    public double getMinimumOdometer() {
+        return 0;
+    }
+
+    /**
+     * Get maximum odometer
+     *
+     * @return maximum odometer (km)
+     */
+    public double getMaximumOdometer() {
+        return 429496729.5;
+    }
+
+    /**
      * Show stored Diagnostic Trouble Codes (DTCs)
      * @return Diagnostic Trouble Codes
      */
-    public String requestTroubleCodes() throws IOException {
+    public String[] requestTroubleCodes() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode03.GET_DIAGNOSTIC_TROUBLE_CODES);
-        return "";
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 
     /**
@@ -579,9 +850,14 @@ public class Obd {
      *
      * @return pending trouble codes
      */
-    public String getPendingTroubleCodes() throws IOException {
+    public String[] getPendingTroubleCodes() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode07.GET_CURRENT_DTC);
-        return "";
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 
     /**
@@ -589,9 +865,14 @@ public class Obd {
      *
      * @return Get calibration ID
      */
-    public String getCalibrationID() throws IOException {
+    public String[] getCalibrationID() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode09.CALIBRATION_ID);
-        return "";
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 
     /**
@@ -599,9 +880,14 @@ public class Obd {
      *
      * @return vehicle identification number
      */
-    public String getVehicleIdentificationNumber() throws IOException {
+    public String[] getVehicleIdentificationNumber() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode09.VEHICLE_IDENTIFICATION_NUMBER);
-        return "";
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 
     /**
@@ -609,8 +895,13 @@ public class Obd {
      *
      * @return ECU name
      */
-    public String getECUName() throws IOException {
+    public String[] getECUName() throws IOException {
+        // Disable headers from being in response
+        if(isHeaderEnabled())
+            enableHeaders(false);
+
         String response = sendCommand(Mode09.ECU_NAME);
-        return "";
+        String[] bytes = response.split("\\s+");
+        return Arrays.copyOfRange(bytes, 2, bytes.length - 1);
     }
 }
