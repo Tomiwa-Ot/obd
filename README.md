@@ -1,5 +1,5 @@
 # Java OBD
-Android library for getting vehicle diagnostics from ELM327 (USB/Bluetooth) connector over OBD protocol
+Android library for getting vehicle diagnostics from ELM327 (USB/Bluetooth) connector over OBD protocol.
 
 ### Basic Usage
 ```java
@@ -7,7 +7,9 @@ Android library for getting vehicle diagnostics from ELM327 (USB/Bluetooth) conn
 Obd obd = new Obd(getApplicationContext());
 
 // For bluetooth connections
-Obd obd - new Obd(, getApplicationContext());
+final UUID SPP_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+// NB: BluetoothDevice device
+Obd obd - new Obd(device.createRfcommSocketToServiceRecord(SPP_UUID), getApplicationContext());
 
 // Enable/disable headers
 obd.enableHeaders(true);
