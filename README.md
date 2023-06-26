@@ -50,5 +50,4 @@ double oilTemperature = obd.getEngineOilTemperature();
 https://github.com/Tomiwa-Ot/obd/wiki
 
 ## TODO
-- Add more AT commands
 - Add Obd and Decoder methods to fetch Mode01 data and decode it
