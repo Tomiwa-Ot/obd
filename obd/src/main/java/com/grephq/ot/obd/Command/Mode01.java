@@ -247,6 +247,36 @@ public class Mode01 {
     public static final String ABSOLUTE_BAROMETRIC_PRESSURE = MODE + " 33";
 
     /**
+     * Catalyst Temperature: Bank 1, Sensor 1
+     */
+    public static final String CATALYST_TEMPERATURE_BANK_1_SENSOR_1 = MODE + " 3C";
+
+    /**
+     * Catalyst Temperature: Bank 2, Sensor 1
+     */
+    public static final String  CATALYST_TEMPERATURE_BANK_2_SENSOR_1 = MODE + " 3D";
+
+    /**
+     * Catalyst Temperature: Bank 1, Sensor 2
+     */
+    public static final String  CATALYST_TEMPERATURE_BANK_1_SENSOR_2 = MODE + " 3E";
+
+    /**
+     * Catalyst Temperature: Bank 2, Sensor 2
+     */
+    public static final String  CATALYST_TEMPERATURE_BANK_2_SENSOR_2 = MODE + " 3F";
+
+    /**
+     * PIDs supported [$41 - $60]
+     */
+    public static final String SUPPORTED_PIDS_41_TO_60 = MODE + " 40";
+
+    /**
+     * Monitor status this drive cycle
+     */
+    public static final String MONITOR_STATUS_THIS_DRIVE_CYCLE = MODE + " 41";
+
+    /**
      * Control module voltage
      */
     public static final String CONTROL_MODULE_VOLTAGE = MODE + " 42";
@@ -317,6 +347,41 @@ public class Mode01 {
     public static final String FUEL_TYPE = MODE + " 51";
 
     /**
+     * Ethanol fuel %
+     */
+    public static final String ETHANOL_FUEL = MODE + " 52";
+
+    /**
+     * Absolute Evap system Vapor Pressure
+     */
+    public static final String ABSOLUTE_EVAP_SYSTEM_VAPOR_PRESSURE = MODE + " 53";
+
+    /**
+     * Short term secondary oxygen sensor trim, A: bank 1, B: bank 3
+     */
+    public static final String SHORT_TERM_SECONDARY_OXYGEN_SENSOR_TRIM_A_BANK_1_B_BANK_3 = MODE + " 55";
+
+    /**
+     * Long term secondary oxygen sensor trim, A: bank 1, B: bank 3
+     */
+    public static final String  LONG_TERM_SECONDARY_OXYGEN_SENSOR_TRIM_A_BANK_1_B_BANK_3 = MODE + " 56";
+
+    /**
+     * Short term secondary oxygen sensor trim, A: bank 2, B: bank 4
+     */
+    public static final String SHORT_TERM_SECONDARY_OXYGEN_SENSOR_TRIM_A_BANK_2_B_BANK_4 = MODE + " 57";
+
+    /**
+     * Long term secondary oxygen sensor trim, A: bank 2, B: bank 4
+     */
+    public static final String LONG_TERM_SECONDARY_OXYGEN_SENSOR_TRIM_A_BANK_2_B_BANK_4 = MODE + " 58";
+
+    /**
+     * Fuel rail absolute pressure
+     */
+    public static final String FUEL_RAIL_ABSOLUTE_PRESSURE = MODE + " 59";
+
+    /**
      * Relative accelerator pedal position
      */
     public static final String RELATIVE_ACCELERATOR_PEDAL_POSITION = MODE + " 5A";
@@ -340,6 +405,51 @@ public class Mode01 {
      * Engine fuel rate
      */
     public static final String ENGINE_FUEL_RATE = MODE + " 5E";
+
+    /**
+     * Emission requirements to which vehicle is designed
+     */
+    public static final String EMISSION_REQUIREMENTS = MODE + " 5F";
+
+    /**
+     * PIDs supported [$61 - $80]
+     */
+    public static final String SUPPORTED_PIDS_61_TO_80 = MODE + " 60";
+
+    /**
+     * Driver's demand engine - percent torque
+     */
+    public static final String DRIVERS_DEMAND_ENGINE_PERCENT_TORQUE = MODE + " 61";
+
+    /**
+     * Actual engine - percent torque
+     */
+    public static final String ACTUAL_ENGINE_PERCENT_TORQUE = MODE + " 62";
+
+    /**
+     * Engine reference torque
+     */
+    public static final String ENGINE_REFERENCE_TORQUE = MODE + " 63";
+
+    /**
+     * Engine percent torque data
+     */
+    public static final String ENGINE_PERCENT_TORQUE_DATA = MODE + " 64";
+
+    /**
+     * Auxiliary input / output supported
+     */
+    public static final String AUXILIARY_INPUT_OUTPUT_SUPPORTED = MODE + " 65";
+
+    /**
+     * Mass air flow sensor
+     */
+    public static final String MASS_AIR_FLOW_SENSOR = MODE + " 66";
+
+    /**
+     * Intake air temperature sensor
+     */
+    public static final String INTAKE_AIR_TEMPERATURE_SESNOR = MODE + " 68";
 
     /**
      * Actual EGR, Commanded EGR, and EGR Error
@@ -417,6 +527,166 @@ public class Mode01 {
     public static final String CHARGE_AIR_COOLER_TEMPERATURE = MODE + " 77";
 
     /**
+     * Exhaust Gas temperature (EGT) Bank 1
+     */
+    public static final String EXHAUST_GAS_TEMPERATURE_BANK_1 = MODE + " 78";
+
+    /**
+     * Exhaust Gas temperature (EGT) Bank 2
+     */
+    public static final String EXHAUST_GAS_TEMPERATURE_BANK_2 = MODE + " 79";
+
+    /**
+     * Diesel particulate filter (DPF) differential pressure
+     */
+    public static final String DIESEL_PARTICULATE_FILTER_DIFFERENTIAL_PRESSURE = MODE + " 7A";
+
+    /**
+     * Diesel particulate filter (DPF)
+     */
+    public static final String DIESEL_PARTICULATE_FILTER = MODE + " 7B";
+
+    /**
+     * Diesel Particulate filter (DPF) temperature
+     */
+    public static final String DIESEL_PARTICULATE_FILTER_TEMPERATURE = MODE + " 7C";
+
+    /**
+     * NOx NTE (Not-To-Exceed) control area status
+     */
+    public static final String NOX_NTE_CONTROL_AREA_STATUS = MODE + " 7D";
+
+    /**
+     * PM NTE (Not-To-Exceed) control area status
+     */
+    public static final String PM_NTE_CONTROL_AREA_STATUS = MODE + " 7E";
+
+    /**
+     * Engine run time
+     */
+    public static final String ENGINE_RUN_TIME = MODE + " 7F";
+
+    /**
+     * PIDs supported [$81 - $A0]
+     */
+    public static final String SUPPORTED_PIDS_81_TO_A0 = MODE + " 80";
+
+    /**
+     * NOx sensor
+     */
+    public static final String NOX_SENSOR = MODE + " 83";
+
+    /**
+     * Manifold surface temperature
+     */
+    public static final String MANIFOLD_SURFACE_TEMPERATURE = MODE + " 84";
+
+    /**
+     * NOx reagent system
+     */
+    public static final String NOX_REAGENT_SYSTEM = MODE + " 85";
+
+    /**
+     * Particulate matter (PM) sensor
+     */
+    public static final String PARTICULATE_MATTER_SENSOR = MODE + " 86";
+
+    /**
+     * SCR Induce System
+     */
+    public static final String SCR_INDUCE_SYSTEM = MODE + " 88";
+
+    /**
+     * Diesel Aftertreatment
+     */
+    public static final String DIESEL_AFTERTREATMENT = MODE + " 8B";
+
+    /**
+     * O2 Sensor (Wide Range)
+     */
+    public static final String O2_SENSOR_WIDE_RANGE = MODE + " 8C";
+
+    /**
+     * Throttle Position G
+     */
+    public static final String THROTTLE_POSITION_G = MODE + " 8D";
+
+    /**
+     * Engine Friction - Percent Torque
+     */
+    public static final String ENGINE_FRICTION_PERCENT_TORQUE = MODE + " 8E";
+
+    /**
+     * PM Sensor Bank 1 & 2
+     */
+    public static final String PM_SENSOR_BANK_1_AND_2 = MODE + " 8F";
+
+    /**
+     * Fuel System Control
+     */
+    public static final String FUEL_SYSTEM_CONTROL = MODE + " 92";
+
+    /**
+     * WWH-OBD Vehicle OBD Counters support
+     */
+    public static final String WWH_OBD_VEHICLE_OBD_COUNTERS_SUPPORT = MODE + " 93";
+
+    /**
+     * NOx Warning And Inducement System
+     */
+    public static final String NOX_WARNING_AND_INDUCEMENT_SYSTEM = MODE + " 94";
+
+    /**
+     * Hybrid/EV Vehicle System Data, Battery, Voltage
+     */
+    public static final String HYBRID_VEHICLE_SYSTEM_DATA_BATTERY_VOLTAGE = MODE + " 9A";
+
+    /**
+     * Diesel Exhaust Fluid Sensor Data
+     */
+    public static final String DIESEL_EXHAUST_FLUID_SENSOR_DATA = MODE + " 9B";
+
+    /**
+     * O2 Sensor Data
+     */
+    public static final String O2_SENSOR_DATA = MODE + " 9C";
+
+    /**
+     * Engine Exhaust Flow Rate
+     */
+    public static final String ENGINE_EXHAUST_FLOW_RATE = MODE + " 9E";
+
+    /**
+     * Fuel System Percentage Use
+     */
+    public static final String FUEL_SYSTEM_PERCENTAGE_USE = MODE + " 9F";
+
+    /**
+     * PIDs supported [$A1 - $C0]
+     */
+    public static final String SUPPORTED_PIDS_A1_TO_C0 = MODE + " A0";
+
+    /**
+     * NOx Sensor Corrected Data
+     */
+    public static final String NOX_SENSOR_CORRECTED_DATA = MODE + " A1";
+
+    /**
+     * Cylinder fuel rate
+     */
+    public static final String CYLINDER_FUEL_RATE = MODE + " A2";
+
+    /**
+     * Transmission Actual Gear
+     */
+    public static final String TRANSMISSION_ACTUAL_GEAR = MODE + " A4";
+
+    /**
+     * Commanded Diesel Exhaust Fluid Dosing
+     */
+    public static final String COMMANDED_DIESEL_EXHAUST_FLUID_DOSING = MODE + " A5";
+
+    /**
      * Odometer
      */
     public static final String ODOMETER = MODE + " A6";
@@ -435,4 +705,9 @@ public class Mode01 {
      * ABS Disable Switch State
      */
     public static final String ABS_DISABLE_SWITCH_STATE = MODE + " A9";
+
+    /**
+     * PIDs supported [$C1 - $E0]
+     */
+    public static final String SUPPORTED_PIDS_C1_TO_E0 = MODE + " C0";
 }
