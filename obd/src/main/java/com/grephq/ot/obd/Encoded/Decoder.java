@@ -1,7 +1,9 @@
 package com.grephq.ot.obd.Encoded;
 
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Decode OBD response
@@ -260,7 +262,7 @@ public class Decoder {
     }
 
     /**
-     * Engine fuel rate
+     * Extract engine fuel rate from OBD response
      *
      * @param data OBD response
      * @return Engine fuel rate (L/h)
@@ -271,5 +273,287 @@ public class Decoder {
         int b = hexToDec(bytes[3]);
 
         return  ((256 * a) + b) / 20.0;
+    }
+
+    /**
+     * Extract fuel system status from OBD response
+     *
+     * @param data OBD response
+     * @return Fuel system status
+     */
+    public static AbstractMap.SimpleEntry<Integer, String> decodeFuelSystemStatus(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return new AbstractMap.SimpleEntry<Integer, String>(a, EnumeratedPIDS.FuelSystemStatus.get(a));
+    }
+
+    /**
+     * Extract fuel trim from OBD response
+     *
+     * @param data OBD response
+     * @return fuel trim (%)
+     */
+    public static double decodeFuelTrim(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return ((100.0 / 128.0) * a) - 100;
+    }
+
+    /**
+     * Extract intake manifold absolute pressure from OBD response
+     *
+     * @param data OBD response
+     * @return intake manifold absolute pressure (kPa)
+     */
+    public static double decodeIntakeManifoldAbsolutePressure(String data) {
+        String[] bytes = data.split("\\s+");
+
+        return hexToDec(bytes[2]);
+    }
+
+    /**
+     * Extract mass air flow sensor air flow rate from OBD response
+     *
+     * @param data OBD response
+     * @return mass air flow sensor air flow rate (g/s)
+     */
+    public static double decodeMAFSensorAirFlowRate(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return ((256 * a) + b) / 100.0;
+    }
+
+    /**
+     * Extract oxygen sensor voltage from OBD response
+     *
+     * @param data OBD response
+     * @return oxygen sensor voltage (V)
+     */
+    public static double decodeOxygenSensorVoltage(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return a / 200.0;
+    }
+
+    /**
+     * Extract oxygen sensor fuel trim from OBD response
+     *
+     * @param data OBD response
+     * @return oxygen sensor fuel trim (%)
+     */
+    public static double decodeOxygenSensorFuelTrim(String data) {
+        String[] bytes = data.split("\\s+");
+        int b = hexToDec(bytes[3]);
+
+        return ((100.0 / 128.0) * b) - 100;
+    }
+
+    /**
+     * Extract run time since engine start from OBD response
+     *
+     * @param data OBD response
+     * @return run time since engine start (s)
+     */
+    public static double decodeRunTimeSinceEngineStart(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (256 * a) + b;
+    }
+
+    /**
+     * Extract distance travelled with malfunction lamp on from OBD response
+     *
+     * @param data OBD response
+     * @return distance travelled with malfunction lamp on (km)
+     */
+    public static double decodeDistanceTravelledWithMalfunctionIndicatorLampOn(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (256 * a) + b;
+    }
+
+    /**
+     * Extract commanded EGR from OBD response
+     *
+     * @param data OBD response
+     * @return commanded EGR (%)
+     */
+    public static double decodeCommandedEGR(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return (100.0 / 255.0) * a;
+    }
+
+    /**
+     * Extract commanded evaporative purge from OBD response
+     *
+     * @param data OBD response
+     * @return Commanded evaporative purge (%)
+     */
+    public static double decodeCommandedEvaporativePurge(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return (100.0 / 255.0) * a;
+    }
+
+    /**
+     * Extract catalyst temperature from OBD response
+     *
+     * @param data OBD response
+     * @return catalyst temperature (°C)
+     */
+    public static double decodeCatalystTemperature(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (((256 * a) + b) / 10.0) - 40.0;
+    }
+
+    /**
+     * Extract commanded module voltage from OBD response
+     *
+     * @param data OBD response
+     * @return commanded module voltage (V)
+     */
+    public static double decodeCommandedModuleVoltage(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return ((256 * a) + b) / 1000.0;
+    }
+
+    /**
+     * Extract absolute load value from OBD response (%)
+     * @param data OBD response
+     * @return absolute load value (%)
+     */
+    public static double decodeAbsoluteLoadValue(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (100.0 / 255.0) * ((256 * a) + b);
+    }
+
+    /**
+     * Extract commanded air-fuel equivalence ratio from OBD response
+     *
+     * @param data OBD response
+     * @return commanded air-fuel equivalence ratio
+     */
+    public static double decodeCommandedAirFuelEquivalenceRatio(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (2.0 / 65536.0) * ((256 * a) + b);
+    }
+
+    /**
+     * Extract relative throttle position from OBD response
+     *
+     * @param data OBD response
+     * @return relative throttle position (%)
+     */
+    public static double decodeRelativeThrottlePosition(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return (100.0 / 255.0) * a;
+    }
+
+    /**
+     * Extract time run with malfunction indicator lamp on from OBD response
+     *
+     * @param data OBD response
+     * @return
+     */
+    public static double decodeTimeRunWithMalfunctionIndicatorLampOn(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (256.0 * a) + b;
+    }
+
+    /**
+     * Extract time since trouble codes cleared from OBD response
+     *
+     * @param data OBD response
+     * @return time since trouble codes cleared (min)
+     */
+    public static double decodeTimeSinceTroubleCodesCleared(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (256.0 * a) + b;
+    }
+
+    /**
+     * Extract ethanol fuel from OBD response
+     *
+     * @param data OBD response
+     * @return ethanol fuel (%)
+     */
+    public static double decodeEthanolFuel(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return (100.0 / 255.0) * a;
+    }
+
+    /**
+     * Extrcat cylinder fuel rate from OBD response
+     *
+     * @param data OBD response
+     * @return cylinder fuel rate (mg/stroke)
+     */
+    public static double decodeCylinderFuelRate(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return ((256.0 * a) + b) / 32.0;
+    }
+
+    /**
+     * Extract engine friction percent torque from OBD response
+     *
+     * @param data OBD response
+     * @return engine friction percent torque (%)
+     */
+    public static double decodeEngineFrictionPercentTorque(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+
+        return a - 125;
+    }
+
+    /**
+     * Extract diesel particulate filter temperature from OBD response
+     *
+     * @param data OBD response
+     * @return diesel particulate filter temperature (°C)
+     */
+    public static double decodeDieselParticulateFilterTemperature(String data) {
+        String[] bytes = data.split("\\s+");
+        int a = hexToDec(bytes[2]);
+        int b = hexToDec(bytes[3]);
+
+        return (((256 * a) + b) / 10.0) - 40;
     }
 }
