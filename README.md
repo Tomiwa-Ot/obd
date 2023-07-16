@@ -37,7 +37,7 @@ class MyCallback<T> implements AsyncCallback {
     }
 }
 
-commands.put("ECU name", new AsyncCommand(Mode09.ECU_NAME, new MyCallback(int), new Object[]{}));
+commands.put("ECU name", new AsyncCommand(Mode09.ECU_NAME, new MyCallback<int>(), new Object[]{}));
 
 AsyncObd async = new AsyncObd(obd, commands, false);
 Thread thread = new Thread(async);
