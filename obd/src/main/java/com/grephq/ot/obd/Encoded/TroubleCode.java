@@ -33,8 +33,9 @@ public class TroubleCode {
      * Powertrain trouble codes
      */
     public static final Map<String, String> P = new HashMap<String, String>() {{
-        // DTC Codes - P0100-P0199 – Fuel and Air Metering
         put("P0000", "No fault");
+
+        // DTC Codes - P0100-P0199 – Fuel and Air Metering
         put("P0100", "Mass or Volume Air Flow Circuit Malfunction");
         put("P0101", "Mass or Volume Air Flow Circuit Range/Performance");
         put("P0102", "Mass or Volume Air Flow Circuit Low Input");
