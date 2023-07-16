@@ -834,4 +834,25 @@ public class TroubleCode {
         put("P0898", "Transmission Control System MIL Request Circuit Low");
         put("P0899", "Transmission Control System MIL Request Circuit High");
     }};
+
+    /**
+     * Body trouble codes
+     */
+    public static final Map<String, String> B = new HashMap<String, String>() {{
+
+    }};
+
+    /**
+     * Chassis trouble codes
+     */
+    public static final Map<String, String> C = new HashMap<String, String>() {{
+
+    }};
+
+    /**
+     * Network trouble codes
+     */
+    public static final Map<String, String> U = new HashMap<String, String>() {{
+
+    }};
 }
