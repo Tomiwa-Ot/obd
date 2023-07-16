@@ -143,7 +143,7 @@ public class Decoder {
      * Extract fuel rail gauge pressure from OBD response
      *
      * @param data OBD response
-     * @return kPa
+     * @return fuel rail gauge pressure (kPa)
      */
     public static double decodeFuelGaugeRailPressure(String data) {
         String[] bytes = data.split("\\s+");
@@ -479,7 +479,7 @@ public class Decoder {
      * Extract time run with malfunction indicator lamp on from OBD response
      *
      * @param data OBD response
-     * @return
+     * @return time run with malfunction indicator lamp on (min)
      */
     public static double decodeTimeRunWithMalfunctionIndicatorLampOn(String data) {
         String[] bytes = data.split("\\s+");
