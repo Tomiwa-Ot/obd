@@ -15,10 +15,15 @@ import androidx.core.app.ActivityCompat;
 
 import com.grephq.ot.obd.Command.AT;
 import com.grephq.ot.obd.Command.Mode01;
+import com.grephq.ot.obd.Command.Mode02;
 import com.grephq.ot.obd.Command.Mode03;
 import com.grephq.ot.obd.Command.Mode04;
+import com.grephq.ot.obd.Command.Mode05;
+import com.grephq.ot.obd.Command.Mode06;
 import com.grephq.ot.obd.Command.Mode07;
+import com.grephq.ot.obd.Command.Mode08;
 import com.grephq.ot.obd.Command.Mode09;
+import com.grephq.ot.obd.Command.Mode0A;
 import com.grephq.ot.obd.Encoded.Decoder;
 
 import java.io.BufferedReader;
@@ -27,9 +32,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.AbstractMap;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * OBD module for reading vehicle diagnostics from ELM327 adapter
@@ -65,6 +74,42 @@ public class Obd {
      */
     private UsbDevice device;
     private UsbDeviceConnection connection;
+
+    /**
+     * All available OBD commands
+     */
+    public static Map<String, String> Commands = new HashMap<>();
+
+    static {
+        try {
+            loadObdCommands(Mode01.class);
+            loadObdCommands(Mode02.class);
+            loadObdCommands(Mode03.class);
+            loadObdCommands(Mode04.class);
+            loadObdCommands(Mode05.class);
+            loadObdCommands(Mode06.class);
+            loadObdCommands(Mode07.class);
+            loadObdCommands(Mode08.class);
+            loadObdCommands(Mode09.class);
+            loadObdCommands(Mode0A.class);
+            loadObdCommands(AT.class);
+        } catch (IllegalAccessException ignored) {}
+    }
+
+    /**
+     * Load all OBD service PIDS into a map
+     *
+     * @param commandClass Service/mode to fetch commands from
+     * @throws IllegalAccessException if field cannot be accessed
+     */
+    private static void loadObdCommands(Class<?> commandClass) throws IllegalAccessException {
+        Field[] fields = commandClass.getFields();
+
+        // Add field name and values to Commands collection
+        for(Field field: fields) {
+            Commands.put(field.getName(), Objects.requireNonNull(field.get(field)).toString());
+        }
+    }
 
     /**
      * Class constructor for bluetooth connections
