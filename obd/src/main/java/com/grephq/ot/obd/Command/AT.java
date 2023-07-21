@@ -3,7 +3,7 @@ package com.grephq.ot.obd.Command;
 /**
  * AT Commands
  */
-public class AT {
+final public class AT {
 
     // -------------------------
     // Identification Commands |
