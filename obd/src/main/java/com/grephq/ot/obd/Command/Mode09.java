@@ -3,7 +3,7 @@ package com.grephq.ot.obd.Command;
 /**
  * Request vehicle information
  */
-public class Mode09 {
+final public class Mode09 {
 
     /**
      * OBD Mode

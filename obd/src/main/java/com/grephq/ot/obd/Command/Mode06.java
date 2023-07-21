@@ -5,6 +5,6 @@ package com.grephq.ot.obd.Command;
  *
  * WARNING: mode 06 is experimental. While it passes software tests, it has not been tested on a real vehicle.
  */
-public class Mode06 {
+final public class Mode06 {
 
 }

@@ -3,7 +3,7 @@ package com.grephq.ot.obd.Command;
 /**
  *  Show current data
  */
-public class Mode01 {
+final public class Mode01 {
 
     /**
      * OBD Mode

@@ -3,7 +3,7 @@ package com.grephq.ot.obd.Command;
 /**
  * Show pending Diagnostic Trouble Codes (detected during current or last driving cycle)
  */
-public class Mode07 {
+final public class Mode07 {
 
     /**
      * Get DTCs from the current/last driving cycle
