@@ -1,5 +1,9 @@
 package com.grephq.ot.obd.Encoded;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +15,16 @@ import java.util.Map;
 public class Decoder {
 
     /**
+     * Trouble code category binary representation
+     */
+    private static final Map<String, String> TroubleCodes = new HashMap<String, String>() {{
+       put("P", "00");
+       put("C", "01");
+       put("B", "10");
+       put("U", "11");
+    }};
+
+    /**
      * Convert hexadecimal to decimal
      *
      * @param hex hexadecimal to convert
@@ -18,6 +32,38 @@ public class Decoder {
      */
     private static int hexToDec(String hex) {
         return Integer.parseInt(hex, 16);
+    }
+
+    /**
+     * Convert hexadecimal to binary
+     *
+     * @param hex hexadecimal to convert
+     * @return binary representation
+     */
+    private static int hexToBinary(String hex){ return Integer.parseInt(hex, 2); }
+
+    /**
+     * Extract diagnostic trouble code from OBD response
+     *
+     * @param data OBD response
+     * @return diagnostic trouble code
+     */
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static String decodeDiagnosticTroubleCodes(String data) {
+        String firstCharacter = String.valueOf(data.charAt(0));
+        int a7_a6 = hexToBinary(firstCharacter);
+        StringBuilder output = new StringBuilder();
+        output.append(
+                TroubleCodes.entrySet()
+                        .stream()
+                        .filter(e -> Integer.toString(a7_a6).substring(0, 1).equals(e.getValue()))
+                        .map(Map.Entry::getKey)
+                        .findFirst()
+        );
+        output.append(Integer.toString(a7_a6).substring(2));
+        output.append(data.substring(1));
+
+        return output.toString();
     }
 
     /**
