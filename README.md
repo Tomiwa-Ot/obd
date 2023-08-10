@@ -73,4 +73,3 @@ https://github.com/Tomiwa-Ot/obd/wiki
 
 ## TODO
 - Add Obd and Decoder methods to fetch Mode01 data and decode it
-- Support decoding and interpreting Diagnostic Trouble Codes
