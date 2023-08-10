@@ -70,6 +70,3 @@ async.stopExecuting() // To terminate thread
   
 ### Documentation
 https://github.com/Tomiwa-Ot/obd/wiki
-
-## TODO
-- Support decoding and interpreting Diagnostic Trouble Codes
