@@ -64,7 +64,7 @@ async.stopExecuting() // To terminate thread
 
   ```
   dependencies {
-	        implementation 'com.github.Tomiwa-Ot:obd:v1.21'
+	        implementation 'com.github.Tomiwa-Ot:obd:1.21'
 	}
   ```
   
