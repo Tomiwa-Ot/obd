@@ -8,7 +8,7 @@ apply plugin: 'maven-publish'
 final group = "com.github.Tomiwa-Ot"
 final artifact = "obd"
 final versionCode = 1
-final versionName = "v1.2"
+final versionName = "v1.21"
 
 afterEvaluate {
     publishing {
