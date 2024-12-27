@@ -50,17 +50,16 @@ async.stopExecuting() // To terminate thread
 ```
 
 ### Installation
-- Add it in your root build.gradle at the end of repositories
+- Add maven support to ```settings.gradle``` or project level ```build.gradle```
   
   ```
-  allprojects {
-  		repositories {
-  			...
-  			maven { url 'https://jitpack.io' }
-  		}
-   }
-   ```
-- Add dependency
+  repositories {
+	        ...
+	        mavenCentral()
+	        maven { url 'https://jitpack.io' }
+	    }	
+  ```
+- Add dependency to app level build.gradle
 
   ```
   dependencies {
