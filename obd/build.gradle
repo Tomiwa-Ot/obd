@@ -1,48 +1,18 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish' // Apply the plugin using the id
 }
 
-// Required plugin in library module for publishing
-apply plugin: 'maven-publish'
-
-final group = "com.github.Tomiwa-Ot"
-final artifact = "obd"
-final versionCode = 1
-final versionName = "v1.21"
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-
-                // You can then customize attributes of the publication as shown below.
-                groupId = group
-                artifactId = artifact
-                version = versionName
-            }
-
-            // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
-                // Applies the component for the debug build variant.
-                from components.debug
-
-                groupId = group + ".debug"
-                artifactId = artifact + "-debug"
-                version = versionName
-            }
-        }
-    }
-}
+group = "com.github.Tomiwa-Ot" // Moved group outside of final declaration
+version = "v1.21" // Moved version outside of final declaration
 
 android {
-    compileSdk 32
+    namespace "com.grephq.ot.obd"
+    compileSdk 34
 
     defaultConfig {
         minSdk 23
-        targetSdk 32
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -60,8 +30,41 @@ android {
     }
 }
 
-dependencies {
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.findByName('release')
 
+                // You can then customize attributes of the publication as shown below.
+                groupId = project.group
+                artifactId = "obd"
+                version = project.version
+            }
+
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                from components.findByName('debug')
+
+                groupId = project.group + ".debug"
+                artifactId = "obd-debug"
+                version = project.version
+            }
+        }
+        repositories {
+            // Configure where to publish your library (e.g., Maven Central, local directory)
+            // Example: Publish to a local directory
+            maven {
+                url "file://${buildDir}/repo"
+            }
+        }
+    }
+}
+
+dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     testImplementation 'junit:junit:4.13.2'
