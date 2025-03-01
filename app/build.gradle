@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace "com.grephq.ot.obd"
     compileSdk 32
 
     defaultConfig {
