@@ -209,17 +209,23 @@ public class Obd {
      */
     public String sendCommand(String command) throws IOException {
         if (connectionType == ConnectionType.BLUETOOTH) {
-            dataOutputStream.writeBytes(command);
+            dataOutputStream.write((command + "\r").getBytes());
             dataOutputStream.flush();
 
-            String line = "";
-            StringBuilder builder = new StringBuilder();
-            while (line != null) {
-                line = bufferedReader.readLine();
-                builder.append(line);
-            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder res = new StringBuilder();
 
-            return builder.toString();
+            int b = reader.read();
+            while (b > -1) { // -1 if the end of the stream is reached
+                char c = (char) b;
+
+                if (c == '>') { // read until '>' arrives
+                    break;
+                }
+                res.append(c);
+                b = reader.read();
+            }
+            return res.toString();
         } else if (connectionType == ConnectionType.USB) {
             byte[] commandInBytes = command.getBytes();
 
