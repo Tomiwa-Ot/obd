@@ -25,11 +25,9 @@ import com.grephq.ot.obd.Command.Mode09;
 import com.grephq.ot.obd.Command.Mode0A;
 import com.grephq.ot.obd.Encoded.Decoder;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
@@ -55,9 +53,19 @@ public class Obd {
     private ConnectionType connectionType;
 
     /**
+     * Connection default timeout
+     */
+    private final int DEFAULT_TIMEOUT_MS = 30000;
+
+    /**
      * Connection timeout
      */
-    private final int TIMEOUT_MS = 30000;
+    private int timeout = DEFAULT_TIMEOUT_MS;
+
+    /**
+     * Suffix to be applied to all commands
+     */
+    private String commandsSuffix = "\r";
 
     /**
      * Objects required for connection via bluetooth
@@ -66,7 +74,6 @@ public class Obd {
     private OutputStream outputStream;
     private InputStream inputStream;
     private DataOutputStream dataOutputStream;
-    private BufferedReader bufferedReader;
 
     /**
      * Objects required for connection via USB
@@ -131,9 +138,13 @@ public class Obd {
         inputStream = this.socket.getInputStream();
 
         dataOutputStream = new DataOutputStream(outputStream);
-        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+    }
 
-        enableHeaders(true);
+    public Obd(BluetoothSocket socket, Context context, int millisTimeout,
+               String commandSuffix) throws IOException {
+        this(socket, context);
+        this.timeout = millisTimeout;
+        this.commandsSuffix = commandSuffix;
     }
 
     /**
@@ -157,8 +168,6 @@ public class Obd {
 
         if (connection == null)
             throw new Exception("Failed to establish connection with USB device");
-
-        enableHeaders(true);
     }
 
     /**
@@ -209,14 +218,18 @@ public class Obd {
      */
     public String sendCommand(String command) throws IOException {
         if (connectionType == ConnectionType.BLUETOOTH) {
-            dataOutputStream.write((command + "\r").getBytes());
+
+            dataOutputStream.write((command + commandsSuffix).getBytes());
             dataOutputStream.flush();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder res = new StringBuilder();
+            long startTime = System.currentTimeMillis();
 
             int b = reader.read();
-            while (b > -1) { // -1 if the end of the stream is reached
+
+            // Read until we encounter the termination prompt '>' or timeout is reached
+            while ((System.currentTimeMillis() - startTime) < timeout && b > -1) {
                 char c = (char) b;
 
                 if (c == '>') { // read until '>' arrives
@@ -225,7 +238,9 @@ public class Obd {
                 res.append(c);
                 b = reader.read();
             }
+
             return res.toString();
+
         } else if (connectionType == ConnectionType.USB) {
             byte[] commandInBytes = command.getBytes();
 
@@ -235,11 +250,11 @@ public class Obd {
             connection.claimInterface(usbInterface, true);
 
             // Send command to USB
-            connection.bulkTransfer(endpoint, commandInBytes, commandInBytes.length, TIMEOUT_MS);
+            connection.bulkTransfer(endpoint, commandInBytes, commandInBytes.length, timeout);
 
             // Receive response
             byte[] buffer = new byte[1024]; // Buffer to store the received data
-            int bytesRead = connection.bulkTransfer(endpoint, buffer, buffer.length, TIMEOUT_MS);
+            int bytesRead = connection.bulkTransfer(endpoint, buffer, buffer.length, timeout);
 
             if (bytesRead > 0) {
                 // Data received successfully
