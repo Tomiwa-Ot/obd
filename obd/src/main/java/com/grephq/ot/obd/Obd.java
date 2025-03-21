@@ -65,7 +65,7 @@ public class Obd {
     /**
      * Suffix to be applied to all commands
      */
-    private String commandsSuffix = "";
+    private String commandsSuffix = "\r";
 
     /**
      * Objects required for connection via bluetooth
@@ -218,36 +218,28 @@ public class Obd {
      */
     public String sendCommand(String command) throws IOException {
         if (connectionType == ConnectionType.BLUETOOTH) {
-            dataOutputStream.writeBytes(command + commandsSuffix);
+
+            dataOutputStream.write((command + commandsSuffix).getBytes());
             dataOutputStream.flush();
 
-            StringBuilder response = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder res = new StringBuilder();
             long startTime = System.currentTimeMillis();
-            int ch;
+
+            int b = reader.read();
 
             // Read until we encounter the termination prompt '>' or timeout is reached
-            while ((System.currentTimeMillis() - startTime) < timeout) {
-                if (inputStream.available() > 0) {
-                    ch = inputStream.read();
-                    if (ch == -1) break;  // End of stream
-                    if ((char) ch == '>') {  // Termination prompt detected
-                        break;
-                    }
-                    response.append((char) ch);
+            while ((System.currentTimeMillis() - startTime) < timeout && b > -1) {
+                char c = (char) b;
 
-                } else {
-                    try {
-                        Thread.sleep(50); // Brief pause to avoid a tight loop
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        break;
-                    }
+                if (c == '>') { // read until '>' arrives
+                    break;
                 }
-
+                res.append(c);
+                b = reader.read();
             }
 
-            return response.toString();
-
+            return res.toString();
 
         } else if (connectionType == ConnectionType.USB) {
             byte[] commandInBytes = command.getBytes();
