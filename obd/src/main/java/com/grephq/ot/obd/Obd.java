@@ -25,9 +25,11 @@ import com.grephq.ot.obd.Command.Mode09;
 import com.grephq.ot.obd.Command.Mode0A;
 import com.grephq.ot.obd.Encoded.Decoder;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
